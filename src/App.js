@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Home from "./page/Home";
+import NavbarLayout from "./components/NavbarLayout";
+import NotFoundPage from "./page/NotFoundPage";
+import NavbarLayoutAdmin from "./components/NavbarLayoutAdmin";
+import HomeAdmin from "./page/admin/HomeAdmin";
+import NotFoundPageAdmin from "./page/admin/NotFoundPageAdmin";
+import Login from "./page/Login";
+import LoginAdmin from "./page/admin/LoginAdmin";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+        <Routes>
+          <Route element={<NavbarLayout />}>
+            <Route index element={<Home />}></Route>
+            <Route path="*" element={<NotFoundPage />}></Route>
+          </Route>
+          <Route element={<NavbarLayoutAdmin />}>
+            <Route index element={<HomeAdmin />}></Route>
+          </Route>
+          <Route path="/admin/*" element={<NotFoundPageAdmin />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/admin/login" element={<LoginAdmin />} />
+        </Routes>
+      </Router>
+    </>
   );
 }
 
