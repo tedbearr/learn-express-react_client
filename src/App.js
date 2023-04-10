@@ -8,24 +8,33 @@ import HomeAdmin from "./page/admin/HomeAdmin";
 import NotFoundPageAdmin from "./page/admin/NotFoundPageAdmin";
 import Login from "./page/Login";
 import LoginAdmin from "./page/admin/LoginAdmin";
+import { authContext } from "./helper/Context";
+import { useState } from "react";
 
 function App() {
+  const [authState, setAuthState] = useState({
+    username: "",
+    id: 0,
+    status: false,
+  });
   return (
     <>
-      <Router>
-        <Routes>
-          <Route element={<NavbarLayout />}>
-            <Route index element={<Home />}></Route>
-            <Route path="*" element={<NotFoundPage />}></Route>
-          </Route>
-          <Route element={<NavbarLayoutAdmin />}>
-            <Route index element={<HomeAdmin />}></Route>
-          </Route>
-          <Route path="/admin/*" element={<NotFoundPageAdmin />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/admin/login" element={<LoginAdmin />} />
-        </Routes>
-      </Router>
+      <authContext.Provider value={{ authState, setAuthState }}>
+        <Router>
+          <Routes>
+            <Route element={<NavbarLayout />}>
+              <Route index element={<Home />}></Route>
+              <Route path="*" element={<NotFoundPage />}></Route>
+            </Route>
+            <Route element={<NavbarLayoutAdmin />}>
+              <Route path="/admin" element={<HomeAdmin />}></Route>
+            </Route>
+            <Route path="/admin/*" element={<NotFoundPageAdmin />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/admin/login" element={<LoginAdmin />} />
+          </Routes>
+        </Router>
+      </authContext.Provider>
     </>
   );
 }

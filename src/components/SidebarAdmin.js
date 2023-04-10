@@ -1,7 +1,13 @@
 import React from "react";
 
 function SidebarAdmin() {
-  return <div>SidebarAdmin</div>;
+  return (
+    <>
+      <div className="">
+        <nav></nav>
+      </div>
+    </>
+  );
 }
 
 export default SidebarAdmin;
