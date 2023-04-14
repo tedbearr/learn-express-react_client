@@ -2,13 +2,13 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import axios from "axios";
-import { base_url, authContext } from "../../helper/Context";
+import { base_url } from "../../helper/Context";
 import { Toaster, toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 function LoginAdmin() {
   const url = useContext(base_url);
-  const { setAuthState } = useContext(authContext);
+  // console.log(authState.username);
   const { handleSubmit, register, reset } = useForm();
   const navigate = useNavigate();
 
@@ -23,15 +23,16 @@ function LoginAdmin() {
       if (result) {
         await axios.post(`${url}api/auth/admin/login`, data).then((res) => {
           console.log(data.username);
-          if (res.data.code != "00") {
+          if (res.data.code !== "00") {
             toast.error(res.data.message);
           } else {
             reset();
-            localStorage.setItem("accessTokenAdmin", res.data.data.accessToken);
-            setAuthState({
-              username: data.username,
-              status: true,
-            });
+            let authAdmin = {
+              accessToken: res.data.data.accessToken,
+              username: res.data.data.username,
+              id: res.data.data.id,
+            };
+            localStorage.setItem("admin", JSON.stringify(authAdmin));
             navigate("/admin");
           }
         });

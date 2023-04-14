@@ -12,14 +12,10 @@ import { authContext } from "./helper/Context";
 import { useState } from "react";
 
 function App() {
-  const [authState, setAuthState] = useState({
-    username: "",
-    id: 0,
-    status: false,
-  });
+  const [expanded, setIsExpanded] = useState(false);
   return (
     <>
-      <authContext.Provider value={{ authState, setAuthState }}>
+      <authContext.Provider value={{ expanded, setIsExpanded }}>
         <Router>
           <Routes>
             <Route element={<NavbarLayout />}>
