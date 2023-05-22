@@ -10,6 +10,7 @@ import Login from "./page/Login";
 import LoginAdmin from "./page/admin/LoginAdmin";
 import { authContext } from "./helper/Context";
 import { useState } from "react";
+import ProductAdmin from "./page/admin/ProductAdmin";
 
 function App() {
   const [expanded, setIsExpanded] = useState(false);
@@ -24,6 +25,7 @@ function App() {
             </Route>
             <Route element={<NavbarLayoutAdmin />}>
               <Route path="/admin" element={<HomeAdmin />}></Route>
+              <Route path="/admin/product" element={<ProductAdmin />}></Route>
             </Route>
             <Route path="/admin/*" element={<NotFoundPageAdmin />} />
             <Route path="/login" element={<Login />} />
