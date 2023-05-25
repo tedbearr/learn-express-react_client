@@ -14,6 +14,7 @@ function LoginAdmin() {
 
   const onSubmit = (data) => {
     e.preventDefault();
+    console.log("clicked");
     Swal.fire({
       icon: "warning",
       width: "400px",
