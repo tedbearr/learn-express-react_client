@@ -13,7 +13,6 @@ function LoginAdmin() {
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    e.preventDefault();
     console.log("clicked");
     Swal.fire({
       icon: "warning",
